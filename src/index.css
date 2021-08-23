@@ -11,12 +11,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 } */
-
+.list {
+  padding: 20px;
+}
 
 /* ./src/index.css */
-/* @tailwind base;
+@tailwind base;
 @tailwind components;
-@tailwind utilities; */
+@tailwind utilities;
 
 .h-112 {
   height: 28rem;
