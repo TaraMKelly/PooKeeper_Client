@@ -29,6 +29,18 @@ function AnimalsContainer() {
     setAnimals(deletedAnimal);
   }
 
+  function handleEditAnimal(updatedAnimal) {
+    const updatedAnimals = animals.map((animal) => {
+      if (animal.id === updatedAnimal.id) {
+        return updatedAnimal;
+      } else {
+        return animal;
+      }
+    });
+    setAnimals(updatedAnimals);
+  }
+
+
   return (
     <div className="w-4/5 mx-auto pt-12">
       <AnimalsToolBar />
@@ -56,6 +68,7 @@ function AnimalsContainer() {
               animals={animals}
               animal={animals.find((dog) => dog.id === parseInt(match.params.id))}
               setAnimals={setAnimals}
+              onAnimalEdit={handleEditAnimal}
             />
           )}
         />
