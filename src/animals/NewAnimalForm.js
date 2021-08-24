@@ -6,14 +6,13 @@ function NewAnimalForm({ animals, setAnimals }) {
   const [name, setName] = useState('');
   const [birthdate, setBirthdate] = useState('');
   const [species, setSpecies] = useState('');
-  const [image, setImage] = useState(
-    ''
-  );
+  const [sex, setSex] = useState('');
+  const [image, setImage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    const res = await fetch(`${process.env.REACT_APP_API_URL}/aniamls`, {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/animals`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -23,6 +22,7 @@ function NewAnimalForm({ animals, setAnimals }) {
         name,
         birthdate,
         species,
+        sex,
         image
       })
     });
@@ -57,7 +57,7 @@ function NewAnimalForm({ animals, setAnimals }) {
             Birthdate
           </label>
           <input
-            type="date"
+            type="text"
             className="flex-grow border-b-2 ml-4 outline-none"
             name="birthdate"
             id="birthdate"
@@ -76,6 +76,19 @@ function NewAnimalForm({ animals, setAnimals }) {
             id="species"
             value={species}
             onChange={(e) => setSpecies(e.target.value)}
+          />
+        </fieldset>
+        <fieldset className="flex flex-grow mr-2 my-2">
+          <label className="text-right w-28" htmlFor="sex">
+            Sex
+          </label>
+          <input
+            type="text"
+            className="flex-grow border-b-2 ml-4 outline-none"
+            name="sex"
+            id="sex"
+            value={sex}
+            onChange={(e) => setSex(e.target.value)}
           />
         </fieldset>
         <fieldset className="flex flex-grow mr-2 my-2">

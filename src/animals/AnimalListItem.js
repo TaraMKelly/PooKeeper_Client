@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FaPencilAlt, FaTrash, FaWalking, FaStickerMule, FaPaw, FaPoo } from 'react-icons/fa';
 
 
-function AnimalListItem({animal: { id, name, age, species, image }, onAnimalDelete}) {
+function AnimalListItem({animal: { id, name, sex, birthdate, species, image }, onAnimalDelete}) {
   
   const handleDelete = async (e) => {
     e.preventDefault();
@@ -23,7 +23,7 @@ function AnimalListItem({animal: { id, name, age, species, image }, onAnimalDele
         />
         <h1 className="text-2xl my-2">{name}</h1>
         <p>
-          {species} - {age ? `${age} old` : 'age unknown'}
+          {species} - {sex} - {birthdate ? `DOB: ${birthdate}` : 'DOB unknown'}
         </p>
       </figure>
       <div className="grid grid-cols-2 mt-4">
