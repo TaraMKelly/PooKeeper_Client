@@ -10,7 +10,7 @@ function LogsContainer() {
         <Route exact path="/logs"></Route>
         <Route exact path="/logs/new"></Route>
         <Route exact path="/logs/:id"></Route>
-        {/* <Route exact path="/logs/:id/add_animals"></Route> */}
+        <Route exact path="/logs/:id/add_animals"></Route>
       </Switch>
     </div>
   );

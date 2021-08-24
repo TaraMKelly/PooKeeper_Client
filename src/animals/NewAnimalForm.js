@@ -6,7 +6,7 @@ function NewAnimalForm({ animals, setAnimals }) {
   const [name, setName] = useState('');
   const [birthdate, setBirthdate] = useState('');
   const [species, setSpecies] = useState('');
-  const [image_url, setImageUrl] = useState(
+  const [image, setImage] = useState(
     ''
   );
 
@@ -23,7 +23,7 @@ function NewAnimalForm({ animals, setAnimals }) {
         name,
         birthdate,
         species,
-        image_url
+        image
       })
     });
 
@@ -87,8 +87,8 @@ function NewAnimalForm({ animals, setAnimals }) {
             className="flex-grow border-b-2 ml-4 outline-none"
             name="image_url"
             id="image_url"
-            value={image_url}
-            onChange={(e) => setImageUrl(e.target.value)}
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
           />
         </fieldset>
 

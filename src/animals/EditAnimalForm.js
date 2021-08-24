@@ -14,9 +14,33 @@ function EditAnimalForm({ animals, animal = {}, setAnimals }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-   
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/dogs/${animal.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({
+        name,
+        birthdate,
+        species,
+        image_url
+      })
+    });
+
+    const parsedBody = await res.json();
+    setAnimals(animals.map(animal => animal.id === parseInt(id) ? parsedBody : animal));
+
     history.push('/animals');
   };
+
+  useEffect(() => {
+    setName(animal.name);
+    setBirthdate(animal.birthdate);
+    setSpecies(animal.species);
+    setImageUrl(animal.image_url)
+  }, [animal])
+
 
   return (
     <>

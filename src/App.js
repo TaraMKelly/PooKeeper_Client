@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from './shared/Navbar';
 import AnimalsContainer from './animals/AnimalsContainer';
-// import logsContainer from './logs/logsContainer';
+import LogsContainer from './logs/LogsContainer';
+import ZookeepersContainer from './zookeepers/ZookeepersContainer'
 import "tailwindcss/tailwind.css";
 
 function App() {
@@ -12,8 +13,11 @@ function App() {
         <Route path="/animals">
           <AnimalsContainer />
         </Route>
-        <Route path="/logs">
-          {/* <logsContainer /> */}
+        <Route path="/animal_logs">
+          <LogsContainer />
+        </Route>
+        <Route path="/zookeepers">
+          <ZookeepersContainer />
         </Route>
       </Switch>
     </Router>

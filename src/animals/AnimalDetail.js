@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import NewLogForm from './NewLogForm';
-import { FaPencilAlt, FaTrash, FaWalking, FaPoop, FaPlus } from 'react-icons/fa';
+import { FaPencilAlt, FaTrash, FaHamburger, FaPaw, FaPoop, FaPlus } from 'react-icons/fa';
 
 function AnimalDetail({ animal = {}, animals, setAnimals }) {
-  const { id, name, age, species, image_url } = animal;
+  const { id, name, age, species, sex, image } = animal;
   const history = useHistory()
   const [logs, setLogs] = useState([]);
   const [error, setError] = useState(null);
@@ -23,16 +23,17 @@ function AnimalDetail({ animal = {}, animals, setAnimals }) {
     async function fetchLogs() {
       if (!id) return;
       const res = await fetch(`${process.env.REACT_APP_API_URL}/animals/${id}`);
-      const { dog_walks } = await res.json();
-
-      setLogs(dog_walks);
+     
+      const { animal_logs } = await res.json();
+      
+      setLogs(animal_logs);
     }
     fetchLogs();
   }, [id]);
-
+console.log(logs)
   const handleDogDelete = async (e) => {
     e.preventDefault();
-    const res = await fetch(`${process.env.REACT_APP_API_URL}/dogs/${id}`, {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/animals/${id}`, {
       method: 'DELETE',
       headers: { Accept: 'application/json' }
     });
@@ -47,13 +48,35 @@ function AnimalDetail({ animal = {}, animals, setAnimals }) {
     const log = logs.find(a => a.id === logId);
     togglePoo(log);
     
-    const res = await fetch(`${process.env.REACT_APP_API_URL}/logs/${logId}`, {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/animal_logs/${logId}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({pooped: !log.pooped})
     });
 
     // if something is wrong with the response, display an error to our users.
+  };
+
+  const handleFedClick = async (logId) => {
+    const log = logs.find(a => a.id === logId);
+    toggleFed(log);
+    
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/animal_logs/${logId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({fed: !log.fed})
+    });
+  }
+
+  const toggleFed = (log) => {
+    const updatedLogs = logs.map((a) => {
+      if (a.id === parseInt(log.id)) {
+        return { ...a, fed: !log.fed };
+      } else {
+        return a;
+      }
+    });
+    setLogs(updatedLogs);
   };
 
   const togglePoo = (log) => {
@@ -71,7 +94,7 @@ function AnimalDetail({ animal = {}, animals, setAnimals }) {
     if (window.confirm("Are you sure you want to delete this log?")) {
       console.log('put delete code here')
       setLogs(logs.filter(log => log.id !== logId));
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/logs/${logId}`, {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/animal_logs/${logId}`, {
         method: 'DELETE'
       })
       // if something is wrong with the response then show an error message
@@ -85,18 +108,19 @@ function AnimalDetail({ animal = {}, animals, setAnimals }) {
   return (
     <div className="grid sm:grid-cols-3 gap-8">
       <div className="p-4 shadow text-center">
-        <img className="object-cover w-full" src={image_url} alt={name} />
+        <img className="object-cover w-full" src={image} alt={name} />
         <h1 className="text-2xl my-2">{name}</h1>
         <p>
           {species} - {age ? `${age} old` : 'age unknown'}
         </p>
+        <p>Sex: {sex}</p>
         <div className="grid grid-cols-2 mt-4">
           <Link
             to={`/animals/${id}`}
             className="text-white bg-green-600 px-4 py-2 flex justify-center"
           >
-            <FaWalking size={20} />
-            Walks
+            <FaPaw size={20} />
+            Create Logs
           </Link>
           <div className="flex justify-end">
             <Link className="flex items-center mr-2" to={`/animals/${id}/edit`}>
@@ -113,19 +137,28 @@ function AnimalDetail({ animal = {}, animals, setAnimals }) {
         </div>
       </div>
       <div className="sm:col-span-2">
-        <h1 className="text-2xl flex items-center">Walks {!showNewLogForm ? <FaPlus onClick={toggleShowNewLogForm} className="ml-2 cursor-pointer" /> : null}</h1>
+        <h1 className="text-2xl flex items-center">Add Logs {!showNewLogForm ? <FaPlus onClick={toggleShowNewLogForm} className="ml-2 cursor-pointer" /> : null}</h1>
 
         <ul className="space-y-4">
+            debugger
           {logs.map((log) => (
             <li key={log.id} className="flex items-bottom justify-between border-b-2 py-2">
-              <span className="pb-1 pt-2 w-44">{log.formatted_time}</span>
+              <span className="pb-1 pt-2 w-44">{log.updated_at}</span>
               <span className="flex items-center">
+                 <button onClick={() => handleFedClick(log.id)}>
+                 <FaHamburger
+                    style={{ color: log.fed ? '#000' : '#bbb' }} size={20}
+                 />
+                 </button>
                 <button onClick={() => handlePooClick(log.id)}>
                   <FaPoop
                     style={{ color: log.pooped ? '#000' : '#bbb' }}
                     size={20}
                   />
                 </button>
+                <div>
+                    <p>{log.note}</p>
+                </div>
               </span>
               <span className="flex items-center">
                 <button onClick={() => handleDogWalkDelete(log.id)}><FaTrash size={20} /></button>

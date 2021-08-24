@@ -6,8 +6,10 @@ import NewAnimalForm from './NewAnimalForm';
 import AnimalDetail from './AnimalDetail';
 import EditAnimalForm from './EditAnimalForm';
 
+
 function AnimalsContainer() {
   const [animals, setAnimals] = useState([]);
+
 
   useEffect(() => {
     async function fetchAnimals() {
@@ -22,6 +24,20 @@ function AnimalsContainer() {
 
     fetchAnimals();
   }, []);
+
+//   useEffect(() => {
+//     async function fetchZookeepers() {
+//       const res = await fetch(`${process.env.REACT_APP_API_URL}/zookeepers`, {
+//         headers: { Accept: 'application/json' }
+//       });
+
+//       const parsedBody = await res.json();
+
+//       setZookeepers(parsedBody);
+//     }
+
+//     fetchZookeepers();
+//   }, []);
 
   return (
     <div className="w-4/5 mx-auto pt-12">
