@@ -12,5 +12,3 @@ function AnimalsList({ animals, onAnimalDelete }) {
 }
 
 export default AnimalsList;
-
-// animals={animals} setAnimals={setAnimals} put back in props if breaks

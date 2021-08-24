@@ -2,8 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaPencilAlt, FaTrash, FaWalking, FaStickerMule, FaPaw, FaPoo } from 'react-icons/fa';
 
-  // animals,
-  // setAnimals, put back if breaks
 
 function AnimalListItem({animal: { id, name, age, species, image }, onAnimalDelete}) {
   

@@ -28,7 +28,7 @@ function AnimalsContainer() {
     const deletedAnimal = animals.filter((animal) => animal.id !== id);
     setAnimals(deletedAnimal);
   }
-  // setAnimals={setAnimals} put back in AnimalList props if breaks
+
   return (
     <div className="w-4/5 mx-auto pt-12">
       <AnimalsToolBar />
