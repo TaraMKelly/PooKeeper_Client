@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
-function EditAnimalForm({ animals, animal = {}, setAnimals, onAnimalEdit }) {
+function EditAnimalForm({ animal = {}, onAnimalEdit }) {
   const history = useHistory();
   const [name, setName] = useState(animal.name);
   const [birthdate, setBirthdate] = useState(animal.birthdate);
@@ -12,7 +12,6 @@ function EditAnimalForm({ animals, animal = {}, setAnimals, onAnimalEdit }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const res = await 
 
     fetch(`http://localhost:9292/animals/${id}`, {
       method: 'PATCH',
@@ -28,14 +27,10 @@ function EditAnimalForm({ animals, animal = {}, setAnimals, onAnimalEdit }) {
         image
       })
     })
-      .then((res) => res.json())
-      .then((updatedAnimal) => onAnimalEdit(updatedAnimal))
-  
+    .then((res) => res.json())
+    .then((updatedAnimal) => onAnimalEdit(updatedAnimal))
 
-    // const parsedBody = await res.json();
-    // setAnimals(animals.map(animal => animal.id === parseInt(id) ? parsedBody : animal));
-
-    // history.push('/animals');
+    history.push('/animals');
   };
 
   useEffect(() => {
