@@ -21,30 +21,20 @@ function AnimalsContainer() {
 
       setAnimals(parsedBody);
     }
-
     fetchAnimals();
   }, []);
 
-//   useEffect(() => {
-//     async function fetchZookeepers() {
-//       const res = await fetch(`${process.env.REACT_APP_API_URL}/zookeepers`, {
-//         headers: { Accept: 'application/json' }
-//       });
-
-//       const parsedBody = await res.json();
-
-//       setZookeepers(parsedBody);
-//     }
-
-//     fetchZookeepers();
-//   }, []);
-
+  function handleDeleteAnimal(id) {
+    const deletedAnimal = animals.filter((animal) => animal.id !== id);
+    setAnimals(deletedAnimal);
+  }
+  // setAnimals={setAnimals} put back in AnimalList props if breaks
   return (
     <div className="w-4/5 mx-auto pt-12">
       <AnimalsToolBar />
       <Switch>
         <Route exact path="/animals">
-          <AnimalsList animals={animals} setAnimals={setAnimals} />
+          <AnimalsList animals={animals} onAnimalDelete={handleDeleteAnimal} />
         </Route>
         <Route exact path="/animals/new">
           <NewAnimalForm animals={animals} setAnimals={setAnimals} />

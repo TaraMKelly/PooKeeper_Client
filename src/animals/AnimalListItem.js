@@ -2,14 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaPencilAlt, FaTrash, FaWalking, FaStickerMule, FaPaw, FaPoo } from 'react-icons/fa';
 
-function AnimalListItem({
-  animal: { id, name, age, species, image },
-  animals,
-  setAnimals
-}) {
+  // animals,
+  // setAnimals, put back if breaks
+
+function AnimalListItem({animal: { id, name, age, species, image }, onAnimalDelete}) {
+  
   const handleDelete = async (e) => {
     e.preventDefault();
-   
+    fetch(`http://localhost:9292/animals/${id}`, {
+      method: "DELETE",
+    });
+    onAnimalDelete(id);  
   };
 
   return (
