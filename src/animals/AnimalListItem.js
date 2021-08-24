@@ -9,7 +9,10 @@ function AnimalListItem({
 }) {
   const handleDelete = async (e) => {
     e.preventDefault();
-   
+    // fetch(`${process.env.REACT_APP_API_URL}/animals/${id}`, 
+    // {method: 'DELETE'})
+    // .then(res => res.text())
+    // .then(res => console.log(res))
   };
 
   return (

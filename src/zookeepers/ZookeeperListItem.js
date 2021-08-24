@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaPencilAlt, FaTrash, FaPaw } from 'react-icons/fa';
+import { useHistory, useParams } from 'react-router-dom';
 
 function ZookeeperListItem({
   zookeeper: { id, name, image },
@@ -8,10 +9,19 @@ function ZookeeperListItem({
   setZookeepers
 }) {
 
+  const history = useHistory();
 
-  const handleDelete = async (e) => {
+  const handleDelete = (e) => {
     e.preventDefault();
-   
+    fetch(`${process.env.REACT_APP_API_URL}/zookeepers/${id}`, 
+    {method: 'DELETE'})
+    .then(res => res.text())
+    .then(res => console.log(res))
+
+    const updatedKeepers = zookeepers.filter( keeper => keeper.id !== id)
+    setZookeepers(updatedKeepers)
+
+    history.push('/zookeepers')
   };
 
   return (
@@ -41,7 +51,7 @@ function ZookeeperListItem({
             className="flex items-center mr-2"
             href={`/zookeepers/${id}`}
           >
-            <FaTrash size={20} />
+            <FaTrash size={20}  />
           </a>
         </div>
       </div>
