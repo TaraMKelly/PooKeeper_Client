@@ -15,6 +15,8 @@ useEffect(() => {
 
 const {id} = useParams();
 
+const history = useHistory();
+
 const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -33,7 +35,7 @@ const handleSubmit = async (e) => {
     const parsedBody = await res.json();
     setZookeepers(zookeepers.map(zookeeper => zookeeper.id === parseInt(id) ? parsedBody : zookeeper))
 
-
+    history.push('/zookeepers')
 }
 
 return <> 
