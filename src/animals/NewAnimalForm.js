@@ -57,7 +57,7 @@ function NewAnimalForm({ animals, setAnimals }) {
             Birthdate
           </label>
           <input
-            type="text"
+            type="date"
             className="flex-grow border-b-2 ml-4 outline-none"
             name="birthdate"
             id="birthdate"
