@@ -72,7 +72,7 @@ return <>
           />
         </fieldset>
         <button
-          className="block relative lg:-top-2 w-100 left-1 px-4 py-2 text-center bg-green-600 text-white"
+          className="block relative lg:-top-2 w-100 left-1 px-4 py-2 text-center bg-yellow-300 hover:bg-yellow-500 rounded-full"
           type="submit"
         >
           Update

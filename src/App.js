@@ -3,7 +3,9 @@ import Navbar from './shared/Navbar';
 import AnimalsContainer from './animals/AnimalsContainer';
 import LogsContainer from './logs/LogsContainer';
 import ZookeepersContainer from './zookeepers/ZookeepersContainer'
+import HomePage from './shared/HomePage'
 import "tailwindcss/tailwind.css";
+
 
 function App() {
   return (
@@ -18,6 +20,9 @@ function App() {
         </Route>
         <Route path="/zookeepers">
           <ZookeepersContainer />
+        </Route>
+        <Route exact path="/">
+          <HomePage />
         </Route>
       </Switch>
     </Router>

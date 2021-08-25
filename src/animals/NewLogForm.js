@@ -37,11 +37,12 @@ function NewLogForm({animal, toggleShowNewLogForm, addLog}) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="">
-      <span className="pb-1 pt-2 w-8"><input required type="datetime-local" onChange={e => set_log_time(e.target.value)}/></span>
+  <div className="w-full max-w-xs">
+    <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <span className="mb-6 pb-1 pt-2 w-8"><input required type="datetime-local" onChange={e => set_log_time(e.target.value)}/></span>
       <span className="flex" style={{paddingRight: "10px"}}>
-        <label htmlFor="fed">
-          <FaHamburger
+        <label className ="block text-gray-700 text-sm font-bold mb-2" htmlFor="fed">
+          <FaHamburger className="mb-1"
             style={{ color: fed ? '#000' : '#bbb' }}
             size={20}
           />
@@ -56,7 +57,7 @@ function NewLogForm({animal, toggleShowNewLogForm, addLog}) {
         </span>
         <span className="flex" style={{paddingRight: "10px"}}>
         <label htmlFor="pooped">
-          <FaPoop
+          <FaPoop className="mb-2"
             style={{ color: pooped ? '#000' : '#bbb' }}
             size={20}
           />
@@ -69,14 +70,15 @@ function NewLogForm({animal, toggleShowNewLogForm, addLog}) {
         />
         </span>
         <span className="flex" style={{paddingRight: "10px"}}>
-        <input type="text" style={{border:"1px solid balck"}} placeholder="note..." onChange={(e)=> set_note(e.target.value)}></input>
+        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" style={{border:"1px solid balck"}} placeholder="note..." onChange={(e)=> set_note(e.target.value)}></input>
       </span>
       
-      <span className="flex items-center">
-        <button className="bg-gray-100 px-4 py-2 mr-2" onClick={toggleShowNewLogForm}>Cancel</button>
-        <button className="flex bg-green-600 px-4 py-2 text-white" type="submit"><FaPaw size={20} /> Add Log</button>
+      <span className="flex items-center mt-4">
+        <button className="bg-gray-100 px-4 py-2 mr-2 rounded-full" onClick={toggleShowNewLogForm}>Cancel</button>
+        <button className="flex bg-yellow-400 hover:bg-yellow-500 px-4 py-2 rounded-full" type="submit"><FaPaw size={20} /> Add Log</button>
       </span>
     </form>
+  </div>
   )
 }
 

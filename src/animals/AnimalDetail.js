@@ -117,7 +117,7 @@ console.log(logs)
         <div className="grid grid-cols-2 mt-4">
           <Link
             to={`/animals/${id}`}
-            className="text-white bg-green-600 px-4 py-2 flex justify-center"
+            className="bg-yellow-400 hover:bg-yellow-500 rounded-full px-4 py-2 flex justify-center"
           >
             <FaPaw size={20} />
             Create Logs
@@ -137,21 +137,23 @@ console.log(logs)
         </div>
       </div>
       <div className="sm:col-span-2">
-        <h1 className="text-2xl flex items-center">Add Logs {!showNewLogForm ? <FaPlus onClick={toggleShowNewLogForm} className="ml-2 cursor-pointer" /> : null}</h1>
+        <div className='mb-6 mt-6 py-2 px-5 pl-20 bg-yellow-400 rounded-full text-2xl hover:bg-yellow-500 items-center text-center'>
+          <h1 className="text-2xl flex items-center">Add Logs {!showNewLogForm ? <FaPlus onClick={toggleShowNewLogForm} className="ml-2 cursor-pointer" /> : null}</h1>
+        </div>
 
         <ul className="space-y-4">
-            debugger
+            
           {logs.map((log) => (
             <li key={log.id} className="flex items-bottom justify-between border-b-2 py-2">
-              <span className="pb-1 pt-2 w-44">{log.updated_at}</span>
+              <span className="pb-1 pt-2 w-44 text-left md:text-center ">{log.updated_at}</span>
               <span className="flex items-center">
                  <button onClick={() => handleFedClick(log.id)}>
-                 <FaHamburger
+                 <FaHamburger className="ml-8 mr-4"
                     style={{ color: log.fed ? '#000' : '#bbb' }} size={20}
                  />
                  </button>
                 <button onClick={() => handlePooClick(log.id)}>
-                  <FaPoop
+                  <FaPoop className="ml-4 mr-8"
                     style={{ color: log.pooped ? '#000' : '#bbb' }}
                     size={20}
                   />
@@ -161,7 +163,7 @@ console.log(logs)
                 </div>
               </span>
               <span className="flex items-center">
-                <button onClick={() => handleDogWalkDelete(log.id)}><FaTrash size={20} /></button>
+                <button onClick={() => handleDogWalkDelete(log.id)}><FaTrash className="ml-6 mr-6" size={20} /></button>
               </span>
             </li>
           ))}

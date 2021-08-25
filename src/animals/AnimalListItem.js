@@ -29,7 +29,7 @@ function AnimalListItem({animal: { id, name, sex, birthdate, species, image }, o
       <div className="grid grid-cols-2 mt-4">
         <Link
           to={`/animals/${id}`}
-          className="text-white bg-green-600 px-4 py-2 flex justify-center"
+          className="bg-yellow-400 rounded-full hover:bg-yellow-500 px-4 py-2 flex justify-center"
         >
           <FaPaw size={20} />
             Create Log

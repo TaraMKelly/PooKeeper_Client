@@ -4,11 +4,13 @@ import { NavLink } from 'react-router-dom';
 
 function Navbar() {
   return (
-    <div className="bg-blue-100">
+    <div className="bg-yellow-200">
       <nav className="w-4/5 mx-auto">
-        <NavLink className="inline-block p-4 -ml-4 list" to="/animals">Animals</NavLink>
+        <NavLink className="hover:underline inline-block p-4 -ml-4 list" exact to="/">HomePage</NavLink>
+        <NavLink className="hover:underline inline-block p-4 -ml-4 list" to="/animals">Animals</NavLink>
         {/* <NavLink className="inline-block p-4 list" to="/logs">Logs</NavLink> */}
-        <NavLink className="inline-block p-4 list" to="/zookeepers">PooKeepers</NavLink>
+        <NavLink className="hover:underline inline-block p-4 -ml-4 list" to="/zookeepers">PooKeepers</NavLink>
+       
       </nav>
     </div>
   );
