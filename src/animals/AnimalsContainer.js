@@ -5,6 +5,8 @@ import AnimalsList from './AnimalsList';
 import NewAnimalForm from './NewAnimalForm';
 import AnimalDetail from './AnimalDetail';
 import EditAnimalForm from './EditAnimalForm';
+// import AnimalsAZ from './AnimalsAZ';
+// import AnimalsAge from './AnimalsAge';
 
 
 function AnimalsContainer() {
@@ -24,6 +26,32 @@ function AnimalsContainer() {
     }
     fetchAnimals();
   }, []);
+
+  // useEffect(() => {
+  //   async function fetchAnimals() {
+  //     const res = await fetch(`${process.env.REACT_APP_API_URL}/animals/a-z`, {
+  //       headers: { Accept: 'application/json' }
+  //     });
+
+  //     const parsedBody = await res.json();
+
+  //     setAnimals(parsedBody);
+  //   }
+  //   fetchAnimals();
+  // }, []);
+
+  // useEffect(() => {
+  //   async function fetchAnimals() {
+  //     const res = await fetch(`${process.env.REACT_APP_API_URL}/animals/age`, {
+  //       headers: { Accept: 'application/json' }
+  //     });
+
+  //     const parsedBody = await res.json();
+
+  //     setAnimals(parsedBody);
+  //   }
+  //   fetchAnimals();
+  // }, []);
 
   function handleDeleteAnimal(id) {
     const deletedAnimal = animals.filter((animal) => animal.id !== id);
@@ -60,6 +88,12 @@ function AnimalsContainer() {
         <Route exact path="/animals">
           <AnimalsList animals={filterSearchAnimal()} onAnimalDelete={handleDeleteAnimal} sendSearchWord={sendSearchWord} />
         </Route>
+        {/* <Route path="/animals/a-z">
+          <AnimalsAZ animals={filterSearchAnimal()} onAnimalDelete={handleDeleteAnimal} sendSearchWord={sendSearchWord} />
+        </Route> */}
+        {/* <Route path="/animals/age">
+          <AnimalsAge animals={filterSearchAnimal()} onAnimalDelete={handleDeleteAnimal} sendSearchWord={sendSearchWord} />
+        </Route> */}
         <Route exact path="/animals/new">
           <NewAnimalForm animals={animals} setAnimals={setAnimals} />
         </Route>

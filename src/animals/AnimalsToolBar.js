@@ -12,6 +12,12 @@ function AnimalsToolBar() {
         <Link to="/animals" className="pr-2 py-2 flex items-center">
           <BsGrid3X2GapFill className="mr-2" size="20" /> All Animals
         </Link>
+        {/* <Link to="/animals/a-z" className="pr-2 py-2 flex items-center">
+          <BsGrid3X2GapFill className="mr-2" size="20" /> Animals A-Z
+        </Link> */}
+        {/* <Link to="/animals/age" className="pr-2 py-2 flex items-center">
+          <BsGrid3X2GapFill className="mr-2" size="20" /> Animals by Age
+        </Link> */}
       </div>
       <div className="flex justify-end">
         <NewAnimalButton />

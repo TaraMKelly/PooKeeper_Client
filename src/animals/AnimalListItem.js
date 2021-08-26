@@ -23,7 +23,8 @@ function AnimalListItem({animal: { id, name, sex, birthdate, age, species, image
         />
         <h1 className="text-2xl my-2">{name}</h1>
         <p>
-          {species} - {sex} - {age == 1 ? `${age} year old` : `${age} years old`}  
+          {species} - {sex} - {age === 1 ? `${age} year old` : `${age} years old`} - 
+          {birthdate ? `DOB: ${birthdate}` : 'DOB unknown'}
         </p>
       </figure>
       <div className="grid grid-cols-2 mt-4">

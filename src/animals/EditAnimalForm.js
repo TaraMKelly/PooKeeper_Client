@@ -80,7 +80,7 @@ function EditAnimalForm({ animal = {}, onAnimalEdit }) {
             Birthdate:
           </label>
           <input
-            type="date"
+            type="text"
             className="flex-grow border-b-2 ml-4 outline-none"
             name="birthdate"
             id="birthdate"
