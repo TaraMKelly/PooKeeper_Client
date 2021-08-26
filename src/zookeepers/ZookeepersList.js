@@ -1,5 +1,5 @@
 import React from "react";
-import ZookeeperListItem from "../zookeepers/ZookeeperListItem";
+import ZookeeperListItem from "./ZookeeperListItem";
 
 function ZookeepersList({ zookeepers, setZookeepers }) {
 

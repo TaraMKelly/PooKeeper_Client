@@ -104,7 +104,6 @@ function AnimalDetail({ animal = {}, animals, setAnimals }) {
       }
     }
   }
-  console.log(logs)
  
 
   return (

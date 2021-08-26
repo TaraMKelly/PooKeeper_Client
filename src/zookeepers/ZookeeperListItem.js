@@ -40,7 +40,7 @@ function ZookeeperListItem({
           className="bg-yellow-400 hover:bg-yellow-500 rounded-full px-4 py-2 flex justify-center"
         >
           <FaPaw size={20} />
-            Create 
+            Manage Animals
         </Link>
         <div className="flex justify-end">
           <Link className="flex items-center mr-2" to={`/zookeepers/${id}/edit`}>

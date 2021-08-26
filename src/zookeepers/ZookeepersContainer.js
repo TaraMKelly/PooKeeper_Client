@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import ZookeepersList from './ZookeepersList'
-import { Switch, Route } from 'react-router-dom';
+import ZookeeperDetail from './ZookeeperDetail'
+import ZookeepersToolBar from './ZookeepersToolBar'
+import { Switch, Route, useParams } from 'react-router-dom';
 import EditZookeeperForm from './EditZookeeperForm';
+import NewZookeeperForm from './NewZookeeperForm';
 
 function ZookeepersContainer() {
   const [zookeepers, setZookeepers] = useState([])
@@ -22,23 +25,37 @@ function ZookeepersContainer() {
 
 
   return (
-    <Switch>
-      <Route
-        exact path="/zookeepers">
-        <ZookeepersList zookeepers={zookeepers} setZookeepers={setZookeepers} />
-      </Route>
-      <Route
-        exact path="/zookeepers/:id/edit"
-        render={({ match }) => (
-          <EditZookeeperForm
-            zookeepers={zookeepers}
-            zookeeper={zookeepers.find((zookeeper) => zookeeper.id === parseInt(match.params.id))}
-            setZookeepers={setZookeepers}
+    <div className="w-4/5 mx-auto pt-12">
+         <ZookeepersToolBar />
+         <Switch>
+          <Route
+            exact path="/zookeepers">
+            <ZookeepersList zookeepers={zookeepers} setZookeepers={setZookeepers} />
+          </Route>
+          <Route
+            exact path="/zookeepers/:id/edit"
+            render={({ match }) => (
+              <EditZookeeperForm
+                zookeepers={zookeepers}
+                zookeeper={zookeepers.find((zookeeper) => zookeeper.id === parseInt(match.params.id))}
+                setZookeepers={setZookeepers}
+              />
+            )}
           />
-
-        )}
-      />
-    </Switch>
+          <Route exact path="/zookeepers/new">
+            <NewZookeeperForm zookeepers={zookeepers} setZookeepers={setZookeepers} />
+          </Route>
+          <Route
+          exact
+          path="/zookeepers/:id"
+          render={({ match }) => (
+            <ZookeeperDetail
+              zookeeper={zookeepers.find((a) => a.id === parseInt(match.params.id))}
+            />
+          )}
+        />
+         </Switch>
+    </div>
   )
 }
 
