@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { FaPaw } from 'react-icons/fa';
 
 function NewAnimalForm({ animals, setAnimals }) {
   const history = useHistory();
@@ -106,9 +107,10 @@ function NewAnimalForm({ animals, setAnimals }) {
         </fieldset>
 
         <button
-          className="block relative lg:-top-2 w-100 left-1 px-4 py-2 text-center bg-green-600 text-white"
+          className="block relative py-3 px-5 bg-yellow-400 rounded-full text-2xl hover:bg-yellow-500  flex items-center text-center"
           type="submit"
-        >
+        > 
+          <FaPaw className='pr-1'/>
           Add Animal
         </button>
       </form>

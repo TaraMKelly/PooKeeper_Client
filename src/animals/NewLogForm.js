@@ -74,7 +74,7 @@ function NewLogForm({animal, toggleShowNewLogForm, addLog}) {
       </span>
       
       <span className="flex items-center mt-4">
-        <button className="bg-gray-100 px-4 py-2 mr-2 rounded-full" onClick={toggleShowNewLogForm}>Cancel</button>
+        <button className="bg-gray-100 hover:bg-gray-300 px-4 py-2 mr-2 rounded-full" onClick={toggleShowNewLogForm}>Cancel</button>
         <button className="flex bg-yellow-400 hover:bg-yellow-500 px-4 py-2 rounded-full" type="submit"><FaPaw size={20} /> Add Log</button>
       </span>
     </form>

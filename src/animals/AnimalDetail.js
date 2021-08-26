@@ -4,11 +4,12 @@ import NewLogForm from './NewLogForm';
 import { FaPencilAlt, FaTrash, FaHamburger, FaPaw, FaPoop, FaPlus } from 'react-icons/fa';
 
 function AnimalDetail({ animal = {}, animals, setAnimals }) {
-  const { id, name, age, species, sex, image } = animal;
+  const { id, name, birthdate, species, sex, image } = animal;
   const history = useHistory()
   const [logs, setLogs] = useState([]);
   const [error, setError] = useState(null);
   const [showNewLogForm, setShowNewLogForm] = useState(false);
+  const [ formatted_time, setFormattedTime ] = useState()
 
   const toggleShowNewLogForm = () => {
     setShowNewLogForm(!showNewLogForm)
@@ -19,18 +20,17 @@ function AnimalDetail({ animal = {}, animals, setAnimals }) {
     toggleShowNewLogForm()
   }
 
+
   useEffect(() => {
     async function fetchLogs() {
       if (!id) return;
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/animals/${id}`);
-     
-      const { animal_logs } = await res.json();
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/animal_logs/animal/${id}`);
       
-      setLogs(animal_logs);
+      setLogs(await res.json());
     }
     fetchLogs();
   }, [id]);
-console.log(logs)
+
   const handleDogDelete = async (e) => {
     e.preventDefault();
     const res = await fetch(`${process.env.REACT_APP_API_URL}/animals/${id}`, {
@@ -90,6 +90,7 @@ console.log(logs)
     setLogs(updatedLogs);
   };
 
+
   const handleDogWalkDelete = async (logId) => {
     if (window.confirm("Are you sure you want to delete this log?")) {
       console.log('put delete code here')
@@ -103,6 +104,7 @@ console.log(logs)
       }
     }
   }
+  console.log(logs)
  
 
   return (
@@ -110,10 +112,11 @@ console.log(logs)
       <div className="p-4 shadow text-center">
         <img className="object-cover w-full" src={image} alt={name} />
         <h1 className="text-2xl my-2">{name}</h1>
-        <p>
-          {species} - {age ? `${age} old` : 'age unknown'}
-        </p>
         <p>Sex: {sex}</p>
+        <p>Species: {species}</p>
+        <p>
+         {birthdate ? `DOB: ${birthdate}` : 'DOB unknown'}
+        </p>
         <div className="grid grid-cols-2 mt-4">
           <Link
             to={`/animals/${id}`}
@@ -142,10 +145,19 @@ console.log(logs)
         </div>
 
         <ul className="space-y-4">
-            
+          {showNewLogForm && (
+              <li key='theNewLogForm'>
+                <NewLogForm
+                  animal={animal}
+                  toggleShowNewLogForm={toggleShowNewLogForm}
+                  addLog={addLog}
+                />
+              </li>
+            )}
           {logs.map((log) => (
+            
             <li key={log.id} className="flex items-bottom justify-between border-b-2 py-2">
-              <span className="pb-1 pt-2 w-44 text-left md:text-center ">{log.updated_at}</span>
+              <span className="pb-1 pt-2 w-44 text-left md:text-center ">{log.formatted_time}</span>
               <span className="flex items-center">
                  <button onClick={() => handleFedClick(log.id)}>
                  <FaHamburger className="ml-8 mr-4"
@@ -167,15 +179,7 @@ console.log(logs)
               </span>
             </li>
           ))}
-          {showNewLogForm && (
-            <li key='theNewLogForm'>
-              <NewLogForm
-                animal={animal}
-                toggleShowNewLogForm={toggleShowNewLogForm}
-                addLog={addLog}
-              />
-            </li>
-          )}
+          
         </ul>
       </div>
     </div>
