@@ -39,9 +39,10 @@ function NewLogForm({animal, toggleShowNewLogForm, addLog}) {
   return (
   <div className="w-full max-w-xs">
     <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-      <span className="mb-6 pb-1 pt-2 w-8"><input required type="datetime-local" onChange={e => set_log_time(e.target.value)}/></span>
+      <span className="mb-4 pb-1 pt-2 w-8 block text-gray-700 text-lg font-bold"><input required type="datetime-local" onChange={e => set_log_time(e.target.value)}/></span>
       <span className="flex" style={{paddingRight: "10px"}}>
-        <label className ="block text-gray-700 text-sm font-bold mb-2" htmlFor="fed">
+        <label className ="mb-2" htmlFor="fed">
+          Fed ?
           <FaHamburger className="mb-1"
             style={{ color: fed ? '#000' : '#bbb' }}
             size={20}
@@ -57,7 +58,8 @@ function NewLogForm({animal, toggleShowNewLogForm, addLog}) {
         </span>
         <span className="flex" style={{paddingRight: "10px"}}>
         <label htmlFor="pooped">
-          <FaPoop className="mb-2"
+          Pooped? 
+          <FaPoop className="mb-5"
             style={{ color: pooped ? '#000' : '#bbb' }}
             size={20}
           />

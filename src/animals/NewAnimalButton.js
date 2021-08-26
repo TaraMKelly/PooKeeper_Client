@@ -7,7 +7,7 @@ function NewAnimalButton() {
   return (
     <Link
       to="/animals/new"
-      className='py-3 px-5 bg-yellow-400 rounded-full text-2xl hover:bg-yellow-500  flex items-center text-center'
+      className='py-3 px-5 rounded-full bg-yellow-400 text-2xl hover:bg-yellow-500  flex items-center text-center'
     >
       <FaDog className="inline-block mr-2 relative -top-0.5" size="20" color="grey-100" />
       New Animal

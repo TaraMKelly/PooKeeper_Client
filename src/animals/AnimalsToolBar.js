@@ -4,6 +4,8 @@ import { BsGrid3X2GapFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom'
 
 function AnimalsToolBar() {
+
+
   return (
     <div className="grid grid-cols-2 py-1 border-b-2 mb-4">
       <div className="text-left">

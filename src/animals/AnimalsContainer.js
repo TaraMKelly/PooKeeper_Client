@@ -9,6 +9,7 @@ import EditAnimalForm from './EditAnimalForm';
 
 function AnimalsContainer() {
   const [animals, setAnimals] = useState([]);
+  const [search, setSearch] = useState("")
 
 
   useEffect(() => {
@@ -40,13 +41,24 @@ function AnimalsContainer() {
     setAnimals(updatedAnimals);
   }
 
+  const sendSearchWord = (value) => {
+      setSearch(value)
+  }
+
+  const filterSearchAnimal = () => {
+    if (search)
+        return [...animals].filter(animal => animal.name.toLowerCase().includes(search) || animal.species.toLowerCase().includes(search))
+    else
+        return animals
+  }
+
 
   return (
     <div className="w-4/5 mx-auto pt-12">
       <AnimalsToolBar />
       <Switch>
         <Route exact path="/animals">
-          <AnimalsList animals={animals} onAnimalDelete={handleDeleteAnimal} />
+          <AnimalsList animals={filterSearchAnimal()} onAnimalDelete={handleDeleteAnimal} sendSearchWord={sendSearchWord} />
         </Route>
         <Route exact path="/animals/new">
           <NewAnimalForm animals={animals} setAnimals={setAnimals} />

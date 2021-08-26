@@ -9,7 +9,7 @@ function AnimalDetail({ animal = {}, animals, setAnimals }) {
   const [logs, setLogs] = useState([]);
   const [error, setError] = useState(null);
   const [showNewLogForm, setShowNewLogForm] = useState(false);
-  const [ formatted_time, setFormattedTime ] = useState()
+ 
 
   const toggleShowNewLogForm = () => {
     setShowNewLogForm(!showNewLogForm)
