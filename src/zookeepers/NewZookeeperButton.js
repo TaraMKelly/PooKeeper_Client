@@ -2,7 +2,6 @@ import React from 'react'
 import { FaPoo } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
-// className="bg-green-600 text-white px-4 py-2 flex items-center w-32"
 function NewZookeeperButton() {
   return (
     <Link

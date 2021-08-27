@@ -1,17 +1,43 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaPencilAlt, FaTrash, FaWalking, FaStickerMule, FaPaw, FaPoo } from 'react-icons/fa';
+import { FaPencilAlt, FaTrash, FaPaw } from 'react-icons/fa';
 
 
-function ZookeeperAnimalList({animal: { id, name, sex, birthdate, age, species, image }, onAnimalDelete}) {
+function ZookeeperAnimalList({animal: { id, name, sex, birthdate, age, species, image }, onAnimalDelete, zookeeper, animalList, setAnimalList, addLog}) {
   
   const handleDelete = async (e) => {
+    if (window.confirm("Are you sure you want to remove this animal?")) {
     e.preventDefault();
     fetch(`http://localhost:9292/animals/${id}`, {
       method: "DELETE",
     });
-    onAnimalDelete(id);  
+    setAnimalList(animalList.filter(animal => animal.id !== id))
+    // onAnimalDelete(id);  
+    }
   };
+
+  const handleDeleteFromList = (id) => {
+    if (window.confirm("Are you sure you want to remove this animal?")) {
+     fetch(`http://localhost:9292/zookeepers/${zookeeper.id}/${id}`, {
+       method: "DELETE",
+     })
+
+     setAnimalList(animalList.filter(animal => animal.id !== id))
+    }
+
+   
+  //   await fetch(`${process.env.REACT_APP_API_URL}/animal_logs/${zookeeper.id}`, {
+  //     method: 'PATCH',
+  //     headers: {
+  //         'Content-Type': 'application/json',
+  //         Accept: 'application/json'
+  //       },
+  //       body: JSON.stringify({
+  //         name,
+  //         image
+  //       })
+  // })
+  }
 
   return (
     <div className="p-4 shadow text-center flex flex-col justify-between" key={ id }>
@@ -47,6 +73,13 @@ function ZookeeperAnimalList({animal: { id, name, sex, birthdate, age, species, 
           </a>
         </div>
       </div>
+      <div
+          onClick={()=>handleDeleteFromList(id)}
+          className="mt-4 bg-yellow-400 cursor-pointer rounded-full hover:bg-yellow-500 px-4 py-2 flex justify-center"
+        >
+          <FaPaw size={20} />
+            Remove Animal from CareList
+        </div>
     </div>
   );
 }

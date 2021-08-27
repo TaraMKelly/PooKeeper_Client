@@ -7,7 +7,7 @@ function AnimalDetail({ animal = {}, animals, setAnimals }) {
   const { id, name, birthdate, species, sex, image } = animal;
   const history = useHistory()
   const [logs, setLogs] = useState([]);
-  const [error, setError] = useState(null);
+
   const [showNewLogForm, setShowNewLogForm] = useState(false);
  
 
@@ -25,43 +25,38 @@ function AnimalDetail({ animal = {}, animals, setAnimals }) {
     async function fetchLogs() {
       if (!id) return;
       const res = await fetch(`${process.env.REACT_APP_API_URL}/animal_logs/animal/${id}`);
-      
       setLogs(await res.json());
     }
     fetchLogs();
   }, [id]);
 
-  const handleDogDelete = async (e) => {
-    e.preventDefault();
+  const handleAnimalDelete = async (id) => {
+    if (window.confirm("Are you sure you want to remove this animal?")) {
     const res = await fetch(`${process.env.REACT_APP_API_URL}/animals/${id}`, {
       method: 'DELETE',
-      headers: { Accept: 'application/json' }
     });
-
     const parsedBody = await res.json();
-
     setAnimals(animals.filter((animal) => animal.id !== parsedBody.id));
-
+    history.push('/animals')
+    }
   };
 
   const handlePooClick = async (logId) => {
     const log = logs.find(a => a.id === logId);
     togglePoo(log);
     
-    const res = await fetch(`${process.env.REACT_APP_API_URL}/animal_logs/${logId}`, {
+    await fetch(`${process.env.REACT_APP_API_URL}/animal_logs/${logId}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({pooped: !log.pooped})
     });
-
-    // if something is wrong with the response, display an error to our users.
   };
 
   const handleFedClick = async (logId) => {
     const log = logs.find(a => a.id === logId);
     toggleFed(log);
     
-    const res = await fetch(`${process.env.REACT_APP_API_URL}/animal_logs/${logId}`, {
+    await fetch(`${process.env.REACT_APP_API_URL}/animal_logs/${logId}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({fed: !log.fed})
@@ -91,17 +86,17 @@ function AnimalDetail({ animal = {}, animals, setAnimals }) {
   };
 
 
-  const handleDogWalkDelete = async (logId) => {
+  const handleAnimalLogDelete = async (logId) => {
     if (window.confirm("Are you sure you want to delete this log?")) {
       console.log('put delete code here')
       setLogs(logs.filter(log => log.id !== logId));
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/animal_logs/${logId}`, {
+      await fetch(`${process.env.REACT_APP_API_URL}/animal_logs/${logId}`, {
         method: 'DELETE'
       })
       // if something is wrong with the response then show an error message
-      if (!res.ok) {
-        setError('Something went wrong')
-      }
+      // if (!res.ok) {
+      //   setError('Something went wrong')
+      // } 
     }
   }
  
@@ -129,7 +124,7 @@ function AnimalDetail({ animal = {}, animals, setAnimals }) {
               <FaPencilAlt size={20} />
             </Link>
             <a
-              onClick={handleDogDelete}
+              onClick={()=>handleAnimalDelete(id)}
               className="flex items-center mr-2"
               href={`/animals/${id}`}
             >
@@ -174,7 +169,7 @@ function AnimalDetail({ animal = {}, animals, setAnimals }) {
                 </div>
               </span>
               <span className="flex items-center">
-                <button onClick={() => handleDogWalkDelete(log.id)}><FaTrash className="ml-6 mr-6" size={20} /></button>
+                <button onClick={() => handleAnimalLogDelete(log.id)}><FaTrash className="ml-6 mr-6" size={20} /></button>
               </span>
             </li>
           ))}

@@ -24,7 +24,7 @@ function NewAnimalForm({ animals, setAnimals }) {
         birthdate,
         species,
         sex,
-        image
+        image,
       })
     });
 

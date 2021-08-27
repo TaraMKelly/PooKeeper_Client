@@ -1,16 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaPencilAlt, FaTrash, FaWalking, FaStickerMule, FaPaw, FaPoo } from 'react-icons/fa';
+import { FaPencilAlt, FaTrash, FaPaw } from 'react-icons/fa';
 
 
-function AnimalListItem({animal: { id, name, sex, birthdate, age, species, image }, onAnimalDelete}) {
+function AnimalListItem({animal: { id, name, sex, age, species, image }, onAnimalDelete}) {
   
   const handleDelete = async (e) => {
+    if (window.confirm("Are you sure you want to remove this animal?")) {
     e.preventDefault();
     fetch(`http://localhost:9292/animals/${id}`, {
       method: "DELETE",
     });
     onAnimalDelete(id);  
+    }
   };
 
   return (
@@ -23,7 +25,7 @@ function AnimalListItem({animal: { id, name, sex, birthdate, age, species, image
         />
         <h1 className="text-2xl my-2">{name}</h1>
         <p>
-          {species} - {sex} - {age == 1 ? `${age} year old` : `${age} years old`}  
+          {species} - {sex} - {age === 1 ? `${age} year old` : `${age} years old`}  
         </p>
       </figure>
       <div className="grid grid-cols-2 mt-4">

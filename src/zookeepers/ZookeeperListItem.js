@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaPencilAlt, FaTrash, FaPaw } from 'react-icons/fa';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 function ZookeeperListItem({
   zookeeper: { id, name, image },
@@ -13,15 +13,17 @@ function ZookeeperListItem({
 
   const handleDelete = (e) => {
     e.preventDefault();
+    if (window.confirm("Are you sure you want to delete this zookeeper?")) {
     fetch(`${process.env.REACT_APP_API_URL}/zookeepers/${id}`, 
     {method: 'DELETE'})
-    .then(res => res.text())
-    .then(res => console.log(res))
+    // .then(res => res.json())
+    // .then(res => console.log(res))
 
     const updatedKeepers = zookeepers.filter( keeper => keeper.id !== id)
     setZookeepers(updatedKeepers)
 
     history.push('/zookeepers')
+    }
   };
 
   return (

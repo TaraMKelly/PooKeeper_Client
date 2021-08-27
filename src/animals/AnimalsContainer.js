@@ -17,9 +17,7 @@ function AnimalsContainer() {
       const res = await fetch(`${process.env.REACT_APP_API_URL}/animals`, {
         headers: { Accept: 'application/json' }
       });
-
       const parsedBody = await res.json();
-
       setAnimals(parsedBody);
     }
     fetchAnimals();
@@ -52,7 +50,6 @@ function AnimalsContainer() {
         return animals
   }
 
-
   return (
     <div className="w-4/5 mx-auto pt-12">
       <AnimalsToolBar />
@@ -67,7 +64,7 @@ function AnimalsContainer() {
           exact
           path="/animals/:id"
           render={({ match }) => (
-            <AnimalDetail
+            <AnimalDetail 
               animal={animals.find((dog) => dog.id === parseInt(match.params.id))}
             />
           )}

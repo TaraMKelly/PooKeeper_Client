@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import ZookeepersList from './ZookeepersList'
 import ZookeeperDetail from './ZookeeperDetail'
 import ZookeepersToolBar from './ZookeepersToolBar'
-import { Switch, Route, useParams } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import EditZookeeperForm from './EditZookeeperForm';
 import NewZookeeperForm from './NewZookeeperForm';
 

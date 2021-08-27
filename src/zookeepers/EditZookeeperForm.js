@@ -38,53 +38,45 @@ const handleSubmit = async (e) => {
     history.push('/zookeepers')
 }
 
-return <> 
-<h1 className="text-3xl mt-3 mb-3">Edit  {zookeeper.name}</h1>
-
-<form
-    onSubmit={handleSubmit}
-    className="text-2xl flex-col space-y-8 items-center p-4 mt-6"
-    >
-    <fieldset className="flex flex-grow mr-2 my-2">
-          <label className="text-right w-28" htmlFor="name">
-            Name
-          </label>
-          <input
-            type="text"
-            className="flex-grow border-b-2 ml-4 outline-none"
-            name="name"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </fieldset>
+return (
+    <> 
+        <h1 className="text-3xl mt-3 mb-3">Edit  {zookeeper.name}</h1>
+        <form onSubmit={handleSubmit} className="text-2xl flex-col space-y-8 items-center p-4 mt-6">
         <fieldset className="flex flex-grow mr-2 my-2">
-          <label className="text-right w-28" htmlFor="image_url">
-            Image Url
-          </label>
-          <input
-            type="text"
-            className="flex-grow border-b-2 ml-4 outline-none"
-            name="image_url"
-            id="image_url"
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
-          />
-        </fieldset>
-        <button
-          className="block relative lg:-top-2 w-100 left-1 px-4 py-2 text-center bg-yellow-300 hover:bg-yellow-500 rounded-full"
-          type="submit"
-        >
-          Update
-        </button>
-
-
-</form>
-
-
-</>
-
-
+            <label className="text-right w-28" htmlFor="name">
+              Name
+            </label>
+            <input
+              type="text"
+              className="flex-grow border-b-2 ml-4 outline-none"
+              name="name"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}  
+            />
+          </fieldset>
+          <fieldset className="flex flex-grow mr-2 my-2">
+            <label className="text-right w-28" htmlFor="image_url">
+              Image Url
+            </label>
+            <input
+              type="text"
+              className="flex-grow border-b-2 ml-4 outline-none"
+              name="image_url"
+              id="image_url"
+              value={image}
+              onChange={(e) => setImage(e.target.value)}
+            />
+          </fieldset>
+          <button
+            className="block relative lg:-top-2 w-100 left-1 px-4 py-2 text-center bg-yellow-300 hover:bg-yellow-500 rounded-full"
+            type="submit"
+          >
+            Update
+          </button>
+      </form>
+      </>
+    )
 }
 
 export default EditZookeeperForm 
